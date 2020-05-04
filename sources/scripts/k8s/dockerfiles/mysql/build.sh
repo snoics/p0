@@ -1,0 +1,1 @@
+docker build -t mysql:standard-1.0 .

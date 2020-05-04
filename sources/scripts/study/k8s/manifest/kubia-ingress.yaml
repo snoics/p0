@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata: 
+  namespace: s
+  name: kubia-ingress
+spec: 
+  rules: 
+  - host: kubia.matrix.com
+    http: 
+      paths: 
+      - path: /
+        backend: 
+          serviceName: nginx-kubia-nodeport
+          servicePort: 81
