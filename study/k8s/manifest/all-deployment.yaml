@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: s
+  name: nginx-kubia
+  labels:
+    app: nginx-kubia
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-kubia
+  template:
+    metadata:
+      labels:
+        app: nginx-kubia
+    spec:
+      containers:
+      - name: nginx
+        volumeMounts:
+          - name: nginx-kubia-data
+            mountPath: /
+        livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+        image: nginx:1.7.9
+        ports:
+        - containerPort: 80
+      - name: kubia
+        volumeMounts:
+          - name: nginx-kubia-data
+            mountPath: /
+        livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+        image: luksa/kubia
+        ports: 
+        - containerPort: 8080
+      volumes:
+        - name: nginx-kubia-data
+          persistentVolumeClaim:
+              claimName: matrix-pvc

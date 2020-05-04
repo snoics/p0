@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  namespace: s
+  name: node
+  labels:
+    app: node
+spec: 
+  containers: 
+  - image: node:latest
+    name: node
+    imagePullPolicy: IfNotPresent
+    command: ["sleep","infinity"]

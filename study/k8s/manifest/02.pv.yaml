@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+  namespace: s
+  name: matrix-pv
+spec: 
+  capacity: 
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes: 
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: local-storage
+  local: 
+    path: /home/matrix/k8s/sample/disk/pv
+  nodeAffinity: 
+    required: 
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - test-sample
