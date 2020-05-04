@@ -1,0 +1,11 @@
+/disk/
+*.log
+**/*.log
+**/jdk-8u231-linux-x64.tar.gz
+**/mysql-5.7.29-linux-glibc2.12-x86_64.tar.gz
+**/bin/
+**/target/
+**/.project
+**/.classpath
+**/.setting
+.gitignore
