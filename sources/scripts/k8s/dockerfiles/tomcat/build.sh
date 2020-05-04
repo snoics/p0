@@ -1,1 +1,1 @@
-docker build -t tomcat:p0 .
+docker build -t tomcat:p0-1.0 .

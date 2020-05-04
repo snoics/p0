@@ -1,1 +1,1 @@
-docker build -t redis:p0 .
+docker build -t redis:p0-1.0 .

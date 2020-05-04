@@ -17,4 +17,4 @@ docker run --name mysql-${APPNAME}-1.0 \
     -v ${VOLUME_PATH}/data/mysql/db:/opt/data/mysql/db \
     -v ${VOLUME_PATH}/data/mysql/tmp:/opt/data/mysql/tmp \
     -v ${VOLUME_PATH}/logs/mysql:/opt/logs/mysql \
-    -d --rm mysql:standard-1.0
+    -d --rm mysql:p0-1.0

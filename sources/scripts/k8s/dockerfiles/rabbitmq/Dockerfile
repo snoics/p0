@@ -1,4 +1,4 @@
-FROM java:p0
+FROM java:p0-1.0
 
 RUN mkdir /home/worksapce
 

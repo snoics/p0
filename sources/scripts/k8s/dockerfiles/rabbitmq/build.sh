@@ -1,1 +1,1 @@
-docker build -t rabbitmq:p0 .
+docker build -t rabbitmq:p0-1.0 .

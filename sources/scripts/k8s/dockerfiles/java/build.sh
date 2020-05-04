@@ -1,1 +1,1 @@
-docker build -t java:p0 .
+docker build -t java:p0-1.0 .

@@ -1,1 +1,1 @@
-docker build -t nginx:p0 .
+docker build -t nginx:p0-1.0 .

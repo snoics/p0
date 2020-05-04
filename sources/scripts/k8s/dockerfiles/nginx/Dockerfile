@@ -1,4 +1,4 @@
-FROM centos:p0
+FROM centos:p0-1.0
 
 RUN mkdir /home/workspace
 RUN mkdir /home/workspace/nginx

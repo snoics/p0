@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: tomcat-p0
-        image: tomcat:p0 # replace it with your exactly <image_name:tags>
+        image: tomcat:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 8080
 
@@ -49,7 +49,7 @@ spec:
     spec:
       containers:
       - name: nginx-p0
-        image: nginx:p0 # replace it with your exactly <image_name:tags>
+        image: nginx:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 80
 
@@ -73,7 +73,7 @@ spec:
     spec:
       containers:
       - name: redis-p0
-        image: redis:p0 # replace it with your exactly <image_name:tags>
+        image: redis:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 6379
 

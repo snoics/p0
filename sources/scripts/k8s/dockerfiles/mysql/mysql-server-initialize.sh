@@ -18,13 +18,13 @@ then
 fi
 
 
-docker run --name mysql-standard -e MYSQL_ROOT_PASSWORD=${PASSWORD} \
+docker run --name mysql-p0-1.0 -e MYSQL_ROOT_PASSWORD=${PASSWORD} \
     -p 3306:3306 \
     -v ${VOLUME_PATH}/config/mysql/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
     -v ${VOLUME_PATH}/data/mysql/db:/opt/data/mysql/db \
     -v ${VOLUME_PATH}/data/mysql/tmp:/opt/data/mysql/tmp \
     -v ${VOLUME_PATH}/logs/mysql:/opt/logs/mysql \
-    -d --rm mysql:standard-1.0
+    -d --rm mysql:p0-1.0
 
 
 #####################################################################

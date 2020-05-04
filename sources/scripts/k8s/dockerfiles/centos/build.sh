@@ -1,1 +1,1 @@
-docker build -t centos:p0 .
+docker build -t centos:p0-1.0 .

@@ -1,1 +1,1 @@
-docker build -t mysql:standard-1.0 .
+docker build -t mysql:p0-1.0 .
