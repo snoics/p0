@@ -2,7 +2,7 @@
 
 mkdir -p ${APPLICATION_DISK_ROOT}
 
-tar -zxvf ./mysql-data-standard-initialize-1.0.tar ${APPLICATION_DISK_ROOT}
+tar -zxvf ./mysql-data-standard-initialize-1.0.tar -C ${APPLICATION_DISK_ROOT}
 
 docker run --name mysql-standard-1.0 \
     -p 3306:3306 \
