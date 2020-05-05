@@ -7,6 +7,30 @@ metadata:
 
 ---
 apiVersion: v1
+kind: PersistentVolume
+metadata: 
+  name: p0-pv
+spec: 
+  capacity: 
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes: 
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Recycle
+  storageClassName: p0-storage
+  local: 
+    path: /home/p0/disk/p0
+  nodeAffinity: 
+    required: 
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - test-sample
+
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
   namespace: p0
@@ -14,7 +38,7 @@ metadata:
 spec: 
   storageClassName: p0-storage
   accessModes: 
-  - ReadWriteMany
+  - ReadWriteOnce
   resources: 
     requests: 
       storage: 5Gi
