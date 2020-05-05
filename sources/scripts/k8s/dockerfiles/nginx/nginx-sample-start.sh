@@ -16,7 +16,7 @@ fi
 
 docker run --name nginx-${APPNAME}-1.0 \
     -p 90:80 \
-    -v ${VOLUME_PATH}/config/conf:/opt/p0/nginx/config \
+    -v ${VOLUME_PATH}/config/conf:/opt/p0/nginx/config/conf \
     -v ${VOLUME_PATH}/applications:/opt/p0/nginx/applications \
     -v ${VOLUME_PATH}/data:/opt/p0/nginx/data \
     -v ${VOLUME_PATH}/logs:/opt/p0/nginx/logs \

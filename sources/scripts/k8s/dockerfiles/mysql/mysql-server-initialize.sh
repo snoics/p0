@@ -13,7 +13,7 @@ then
   mkdir -p ${VOLUME_PATH}/data/db
   mkdir -p ${VOLUME_PATH}/data/tmp
   mkdir -p ${VOLUME_PATH}/logs
-  cp -f ./mysqld.cnf ${VOLUME_PATH}/config/
+  cp -f mysqld.cnf ${VOLUME_PATH}/config/
   chown -R systemd-coredump:root ${VOLUME_PATH}
 fi
 
@@ -28,6 +28,13 @@ docker run --name mysql-p0-1.0 -e MYSQL_ROOT_PASSWORD=${PASSWORD} \
 
 
 #####################################################################
+# cd /home/p0/disk/initialize/mysql/standard/
+# tar -zcvf mysql-data-standard-initializer-1.0.tar *
+# mv -f /home/p0/disk/initialize/mysql/standard/mysql-data-standard-initializer-1.0.tar /home/p0/sources/scripts/k8s/dockerfiles/mysql/data
+#
+#
+#
+#
 # 以上步骤操作完，默认已启用远程访问，如需手工操作，按以下步骤执行
 #
 # docker exec -it containerId bash

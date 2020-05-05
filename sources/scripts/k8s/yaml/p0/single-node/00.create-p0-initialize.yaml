@@ -16,7 +16,7 @@ spec:
   volumeMode: Filesystem
   accessModes: 
   - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Delete
   storageClassName: p0-storage
   local: 
     path: /home/p0/disk/p0

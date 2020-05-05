@@ -15,6 +15,7 @@ COPY conf /home/workspace/nginx
 RUN mkdir -p /opt/p0/nginx/data \
     && mkdir -p /opt/p0/nginx/applications \
     && mkdir -p /opt/p0/nginx/logs \
+    && mkdir -p /opt/p0/nginx/config \
     && mv /home/workspace/nginx/conf /opt/p0/nginx/config \
     && rm -rf /home/*
 
@@ -24,4 +25,4 @@ WORKDIR /opt
 
 EXPOSE 80
 
-CMD ["nginx","-c","/opt/p0/nginx/config/nginx.conf"]
+CMD ["nginx","-c","/opt/p0/nginx/config/conf/nginx.conf"]

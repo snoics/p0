@@ -21,13 +21,14 @@ spec:
 
 ---
 apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
-kind: Statefulset
+kind: StatefulSet
 metadata:
   namespace: p0
   name: p0-app
   labels:
     app: p0-app
 spec:
+  serviceName: p0-service
   replicas: 1
   selector:
     matchLabels:
@@ -38,14 +39,22 @@ spec:
         app: p0-app
     spec:
       containers:
+      - name: mysql-p0
+        image: mysql:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 3306
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0
+            #subPath: mysql
       - name: redis-p0
         image: redis:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 6379
         volumeMounts: 
           - name: p0-disk
-            mountPath: /home/p0/disk/p0
-            subPath: redis
+            mountPath: /opt/p0
+            #subPath: redis
       - name: rabbitmq-p0
         image: rabbitmq:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
@@ -53,32 +62,24 @@ spec:
         - containerPort: 15672
         volumeMounts: 
           - name: p0-disk
-            mountPath: /home/p0/disk/p0
-            subPath: rabbitmq
-      - name: mysql-p0
-        image: mysql:p0-1.0 # replace it with your exactly <image_name:tags>
-        ports:
-        - containerPort: 3306
-        volumeMounts: 
-          - name: p0-disk
-            mountPath: /home/p0/disk/p0
-            subPath: mysql
+            mountPath: /opt/p0
+            #subPath: rabbitmq
       - name: tomcat-p0
         image: tomcat:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 8080
         volumeMounts: 
           - name: p0-disk
-            mountPath: /home/p0/disk/p0
-            subPath: tomcat
+            mountPath: /opt/p0
+            #subPath: tomcat
       - name: nginx-p0
         image: nginx:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 80
         volumeMounts: 
           - name: p0-disk
-            mountPath: /home/p0/disk/p0
-            subPath: nginx
+            mountPath: /opt/p0
+            #subPath: nginx
       volumes: 
         - name: p0-disk
           persistentVolumeClaim: 
