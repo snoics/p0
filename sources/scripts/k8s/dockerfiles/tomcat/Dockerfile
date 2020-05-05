@@ -2,10 +2,10 @@ FROM java:p0-1.0
 
 RUN mkdir /home/worksapce
 
-ADD apache-tomcat-8.5.54.tar.gz /home/workspace
-COPY ./conf/catalina.sh /home/workspace/apache-tomcat-8.5.54/bin
-COPY ./conf/logging.properties /home/workspace/apache-tomcat-8.5.54/conf
-COPY ./conf/server.xml /home/workspace/apache-tomcat-8.5.54/conf
+ADD apache-tomcat-8.5.54.tar.gz /home/workspace/
+COPY ./conf/catalina.sh /home/workspace/apache-tomcat-8.5.54/bin/
+COPY ./conf/logging.properties /home/workspace/apache-tomcat-8.5.54/conf/
+COPY ./conf/server.xml /home/workspace/apache-tomcat-8.5.54/conf/
 
 RUN mv /home/workspace/apache-tomcat-8.5.54 /opt/tomcat \
   && chmod +x /opt/tomcat/bin/catalina.sh \

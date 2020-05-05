@@ -2,8 +2,8 @@ FROM java:p0-1.0
 
 RUN mkdir /home/worksapce
 
-ADD otp_src_22.3.tar.gz /home/workspace
-ADD rabbitmq-server-generic-unix-3.8.3.tar /home/workspace
+ADD otp_src_22.3.tar.gz /home/workspace/
+ADD rabbitmq-server-generic-unix-3.8.3.tar /home/workspace/
 
 WORKDIR /home/workspace/otp_src_22.3
 RUN mkdir /etc/erlang && ./configure --prefix=/opt/erlang && make && make install
@@ -17,7 +17,7 @@ RUN mv /home/workspace/rabbitmq_server-3.8.3 /opt/rabbitmq_server \
     && mkdir -p /opt/data/rabbitmq \
     && mkdir -p /opt/logs/rabbitmq
 
-COPY ./conf /home/workspace
+COPY conf /home/workspace
 RUN mkdir /etc/rabbitmq \
     && mv /home/workspace/rabbitmq.conf /etc/rabbitmq \
     && mv /home/workspace/rabbitmq-env.conf /etc/rabbitmq \
