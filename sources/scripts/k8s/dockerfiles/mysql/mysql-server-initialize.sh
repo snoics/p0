@@ -6,24 +6,24 @@ PASSWORD=#f4^6]e9!go
 
 if [ -d "${VOLUME_PATH}" ];
 then
-  rm -rf ${VOLUME_PATH}/config/mysql
-  rm -rf ${VOLUME_PATH}/data/mysql
-  rm -rf ${VOLUME_PATH}/logs/mysql
-  mkdir -p ${VOLUME_PATH}/config/mysql
-  mkdir -p ${VOLUME_PATH}/data/mysql/db
-  mkdir -p ${VOLUME_PATH}/data/mysql/tmp
-  mkdir -p ${VOLUME_PATH}/logs/mysql
-  cp -f ./mysqld.cnf ${VOLUME_PATH}/config/mysql
+  rm -rf ${VOLUME_PATH}/config
+  rm -rf ${VOLUME_PATH}/data
+  rm -rf ${VOLUME_PATH}/logs
+  mkdir -p ${VOLUME_PATH}/config
+  mkdir -p ${VOLUME_PATH}/data/db
+  mkdir -p ${VOLUME_PATH}/data/tmp
+  mkdir -p ${VOLUME_PATH}/logs
+  cp -f ./mysqld.cnf ${VOLUME_PATH}/config/
   chown -R systemd-coredump:root ${VOLUME_PATH}
 fi
 
 
 docker run --name mysql-p0-1.0 -e MYSQL_ROOT_PASSWORD=${PASSWORD} \
     -p 3306:3306 \
-    -v ${VOLUME_PATH}/config/mysql/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
-    -v ${VOLUME_PATH}/data/mysql/db:/opt/data/mysql/db \
-    -v ${VOLUME_PATH}/data/mysql/tmp:/opt/data/mysql/tmp \
-    -v ${VOLUME_PATH}/logs/mysql:/opt/logs/mysql \
+    -v ${VOLUME_PATH}/config/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
+    -v ${VOLUME_PATH}/data/db:/opt/p0/mysql/data/db \
+    -v ${VOLUME_PATH}/data/tmp:/opt/p0/mysql/data/tmp \
+    -v ${VOLUME_PATH}/logs:/opt/p0/mysql/logs \
     -d --rm mysql:p0-1.0
 
 

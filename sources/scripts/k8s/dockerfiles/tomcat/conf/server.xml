@@ -165,7 +165,7 @@
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/opt/logs/tomcat"
              -->
 
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/opt/logs/tomcat"
+        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="/opt/p0/tomcat/logs"
                prefix="localhost_access_log" suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 

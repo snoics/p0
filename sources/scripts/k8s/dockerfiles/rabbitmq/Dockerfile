@@ -13,14 +13,14 @@ ENV PATH=$PATH:$ERLANG_HOME/bin
 
 WORKDIR /home/workspace/rabbitmq_server-3.8.3
 RUN mv /home/workspace/rabbitmq_server-3.8.3 /opt/rabbitmq_server \
-    && mkdir -p /opt/config/rabbitmq \
-    && mkdir -p /opt/data/rabbitmq \
-    && mkdir -p /opt/logs/rabbitmq
+    && mkdir -p /opt/p0/rabbitmq/config \
+    && mkdir -p /opt/p0/rabbitmq/data \
+    && mkdir -p /opt/p0/rabbitmq/logs
 
 COPY conf /home/workspace
 RUN mkdir /etc/rabbitmq \
-    && mv /home/workspace/rabbitmq.conf /etc/rabbitmq \
-    && mv /home/workspace/rabbitmq-env.conf /etc/rabbitmq \
+    && mv /home/workspace/conf/rabbitmq.conf /etc/rabbitmq \
+    && mv /home/workspace/conf/rabbitmq-env.conf /etc/rabbitmq \
     && rm -rf /home/*
 
 ENV RABBITMQ_HOME=/opt/rabbitmq_server

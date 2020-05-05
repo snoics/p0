@@ -1,0 +1,30 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: p0-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+  name: p0-pv
+spec: 
+  capacity: 
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes: 
+  - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: p0-storage
+  local: 
+    path: /home/p0/disk/p0
+  nodeAffinity: 
+    required: 
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - test-sample

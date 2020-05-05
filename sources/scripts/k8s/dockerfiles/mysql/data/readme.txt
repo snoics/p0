@@ -6,10 +6,10 @@ tar -zxvf ./mysql-data-standard-initialize-1.0.tar -C ${APPLICATION_DISK_ROOT}
 
 docker run --name mysql-p0-1.0 \
     -p 3306:3306 \
-    -v ${APPLICATION_DISK_ROOT}/config/mysql/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
-    -v ${APPLICATION_DISK_ROOT}/data/mysql/db:/opt/data/mysql/db \
-    -v ${APPLICATION_DISK_ROOT}/data/mysql/tmp:/opt/data/mysql/tmp \
-    -v ${APPLICATION_DISK_ROOT}/logs/mysql:/opt/logs/mysql \
+    -v ${APPLICATION_DISK_ROOT}/config/mysqld.cnf:/etc/mysql/mysql.conf.d/mysqld.cnf \
+    -v ${APPLICATION_DISK_ROOT}/data/db:/opt/p0/mysql/data/db \
+    -v ${APPLICATION_DISK_ROOT}/data/tmp:/opt/p0/mysql/data/tmp \
+    -v ${APPLICATION_DISK_ROOT}/logs:/opt/p0/mysql/logs \
     -d --rm mysql:p0-1.0
 
 password:root/#f4^6]e9!go

@@ -4,14 +4,11 @@ RUN mkdir /home/worksapce
 COPY mysqld.cnf /home/workspace/
 
 RUN cp -f /home/workspace/mysqld.cnf /etc/mysql/mysql.conf.d \
-    && mkdir -p /opt/data/mysql/mysqld \
-    && mkdir -p /opt/data/mysql/db \
-    && mkdir -p /opt/data/mysql/tmp \
-    && mkdir -p /opt/config/mysql \
-    && mkdir -p /opt/logs/mysql \
-    && chown -R mysql:mysql /opt/config/mysql \
-    && chown -R mysql:mysql /opt/data/mysql \
-    && chown -R mysql:mysql /opt/logs/mysql \
+    && mkdir -p /opt/p0/mysql/data/mysqld \
+    && mkdir -p /opt/p0/mysql/data/db \
+    && mkdir -p /opt/p0/mysql/data/tmp \
+    && mkdir -p /opt/p0/mysql/logs \
+    && chown -R mysql:mysql /opt/p0/mysql \
     && rm -rf /home/*
 
 WORKDIR /opt
