@@ -12,11 +12,10 @@ RUN ./configure --prefix=/opt/nginx --user=root --group=root --with-http_ssl_mod
     && make && make install
 
 COPY conf /home/workspace/nginx
-RUN mkdir -p /opt/data/nginx \
-    && mkdir -p /opt/applications/nginx \
-    && mkdir -p /opt/logs/nginx \
-    && mkdir -p /opt/config/nginx \
-    && mv /home/workspace/nginx/conf /opt/config/nginx \
+RUN mkdir -p /opt/p0/nginx/data \
+    && mkdir -p /opt/p0/nginx/applications \
+    && mkdir -p /opt/p0/nginx/logs \
+    && mv /home/workspace/nginx/conf /opt/p0/nginx/config \
     && rm -rf /home/*
 
 ENV PATH /opt/nginx/sbin:$PATH
@@ -25,4 +24,4 @@ WORKDIR /opt
 
 EXPOSE 80
 
-CMD ["nginx","-c","/opt/config/nginx/nginx.conf"]
+CMD ["nginx","-c","/opt/p0/nginx/config/nginx.conf"]
