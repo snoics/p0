@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "mysql 5.7.30 standard server initialize ......"
 
-VOLUME_PATH=/home/p0/disk/standard
+VOLUME_PATH=/home/p0/disk/initialize/mysql/standard
 PASSWORD=#f4^6]e9!go
 
 if [ -d "${VOLUME_PATH}" ];

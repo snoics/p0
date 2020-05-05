@@ -12,14 +12,15 @@ ENV ERLANG_HOME=/opt/erlang
 ENV PATH=$PATH:$ERLANG_HOME/bin
 
 WORKDIR /home/workspace/rabbitmq_server-3.8.3
-RUN mv /home/workspace/rabbitmq_server-3.8.3 /opt/rabbitmq_server && mkdir /opt/data && mkdir /opt/data/rabbitmq && mkdir /opt/logs && mkdir /opt/logs/rabbitmq
+RUN mv /home/workspace/rabbitmq_server-3.8.3 /opt/rabbitmq_server \
+    && mkdir -p /opt/config/rabbitmq \
+    && mkdir -p /opt/data/rabbitmq \
+    && mkdir -p /opt/logs/rabbitmq
 
-COPY rabbitmq.conf /home/workspace
+COPY ./conf /home/workspace
 RUN mkdir /etc/rabbitmq \
     && mv /home/workspace/rabbitmq.conf /etc/rabbitmq \
-    && touch /etc/rabbitmq/rabbitmq-env.conf \
-    && echo "RABBITMQ_MNESIA_BASE=/opt/data/rabbitmq" >> /etc/rabbitmq/rabbitmq-env.conf \
-    && echo "RABBITMQ_LOG_BASE=/opt/logs/rabbitmq" >> /etc/rabbitmq/rabbitmq-env.conf \
+    && mv /home/workspace/rabbitmq-env.conf /etc/rabbitmq \
     && rm -rf /home/*
 
 ENV RABBITMQ_HOME=/opt/rabbitmq_server

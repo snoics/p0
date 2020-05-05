@@ -5,13 +5,23 @@ RUN mkdir /home/worksapce
 ADD redis-4.0.14.tar.gz /home/workspace
 
 WORKDIR /home/workspace/redis-4.0.14
-RUN make && make install && mv /home/workspace/redis-4.0.14/src /opt/redis && mkdir /opt/data && mkdir /opt/data/redis && mkdir /opt/logs && mkdir /opt/logs/redis
+RUN make && make install
 
 COPY redis.conf /home/workspace
-RUN cp -f /home/workspace/redis.conf /opt/redis && rm -rf /home/*
+
+RUN mv /home/workspace/redis-4.0.14/src /opt/redis \
+    cp -f /home/workspace/redis.conf /opt/config/redis \
+    && mkdir -p /opt/config/redis \
+    && mkdir -p /opt/data/redis \
+    && mkdir -p /opt/logs/redis \
+    && rm -rf /home/*
 
 WORKDIR /opt
 
 EXPOSE 6379
 
-CMD ["/opt/redis/redis-server", "/opt/redis/redis.conf"]
+CMD ["/opt/redis/redis-server", "/opt/config/redis/redis.conf"]
+
+###############################################################
+# requirepass #f4^6]e9!go
+###############################################################

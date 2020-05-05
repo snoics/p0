@@ -1,8 +1,10 @@
 FROM mysql:5.7.30
 
 RUN mkdir /home/worksapce
+COPY mysql.cnf /home/workspace
 
 RUN mkdir -p /opt/data \
+    && cp -f /home/workspace/mysqld.cnf /etc/mysql/mysql.conf.d \
     && mkdir -p /opt/data/mysql/mysqld \
     && mkdir -p /opt/data/mysql/db \
     && mkdir -p /opt/data/mysql/tmp \
