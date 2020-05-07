@@ -71,14 +71,6 @@ spec:
           - name: p0-disk
             mountPath: /opt/p0
             #subPath: mysql
-      - name: redis-p0
-        image: redis:p0-1.0 # replace it with your exactly <image_name:tags>
-        ports:
-        - containerPort: 6379
-        volumeMounts: 
-          - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: redis
       - name: rabbitmq-p0
         image: rabbitmq:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
@@ -88,6 +80,22 @@ spec:
           - name: p0-disk
             mountPath: /opt/p0
             #subPath: rabbitmq
+      - name: redis-p0
+        image: redis:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 6379
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0
+            #subPath: redis
+      - name: javaapp-p0
+        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 9090
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0
+            #subPath: tomcat
       - name: tomcat-p0
         image: tomcat:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:

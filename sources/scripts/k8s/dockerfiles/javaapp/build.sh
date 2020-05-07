@@ -1,0 +1,1 @@
+docker build -t javaapp:p0-1.0 .
