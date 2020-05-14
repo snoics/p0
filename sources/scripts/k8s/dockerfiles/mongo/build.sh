@@ -1,0 +1,1 @@
+docker build -t mongo:p0-1.0 .

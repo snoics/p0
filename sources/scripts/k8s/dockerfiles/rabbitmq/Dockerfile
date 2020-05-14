@@ -18,15 +18,18 @@ RUN mv /home/workspace/rabbitmq_server-3.8.3 /opt/rabbitmq_server \
     && mkdir -p /opt/p0/rabbitmq/logs
 
 COPY conf /home/workspace
-RUN mkdir /etc/rabbitmq \
-    && mv /home/workspace/conf/rabbitmq.conf /etc/rabbitmq \
-    && mv /home/workspace/conf/rabbitmq-env.conf /etc/rabbitmq \
+
+RUN ls /home/workspace && mkdir /etc/rabbitmq \
+    && mv /home/workspace/rabbitmq.conf /etc/rabbitmq \
+    && mv /home/workspace/rabbitmq-env.conf /etc/rabbitmq \
     && rm -rf /home/*
 
 ENV RABBITMQ_HOME=/opt/rabbitmq_server
 ENV PATH=$PATH:$RABBITMQ_HOME/sbin
 
 RUN rabbitmq-plugins enable rabbitmq_management
+
+RUN mkdir -p /opt/rabbitmq_server/var/lib/rabbitmq/mnesia && mkdir -p /opt/rabbitmq_server/var/log
 
 WORKDIR /opt
 
