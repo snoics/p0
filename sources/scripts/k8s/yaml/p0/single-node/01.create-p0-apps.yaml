@@ -71,6 +71,31 @@ spec:
           - name: p0-disk
             mountPath: /opt/p0
             #subPath: mysql
+      - name: mongo-p0
+        image: mongo:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 27017
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0
+            #subPath: mongo
+      - name: elasticsearch-p0
+        image: elasticsearch:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 9200
+        - containerPort: 9300
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0
+            #subPath: elasticsearch
+      - name: kibana-p0
+        image: kibana:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 5610
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0
+            #subPath: kibana
       - name: rabbitmq-p0
         image: rabbitmq:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
