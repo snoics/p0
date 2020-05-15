@@ -1,13 +1,14 @@
 #!/bin/bash
-APPNAME=p0
-VOLUME_PATH=/home/p0/disk/${APPNAME}/rabbitmq
+echo "rabbitmq standard server initialize ......"
 
-echo "rabbitmq ${APPNAME} server deploy and start ......"
+VOLUME_PATH=/home/p0/disk/initialize/rabbitmq/standard
+PASSWORD=#f4^6]e9!go
 
 if [ ! -d "${VOLUME_PATH}" ];
 then
-  mkdir -p ${VOLUME_PATH}
-  tar -zxvf ./data/rabbitmq-data-standard-initializer-1.0.tar -C ${VOLUME_PATH}
+  mkdir -p ${VOLUME_PATH}/config
+  mkdir -p ${VOLUME_PATH}/data/mnesia
+  mkdir -p ${VOLUME_PATH}/logs
   chmod -R 775 ${VOLUME_PATH}
   cp -rf conf ${VOLUME_PATH}/config
   chown -R systemd-coredump:root ${VOLUME_PATH}
@@ -25,11 +26,16 @@ docker run --name rabbitmq-${APPNAME}-1.0 \
     -v ${VOLUME_PATH}/logs:/opt/rabbitmq_server/var/log \
     -d --rm rabbitmq:p0-1.0
 
-#############################################################
+#####################################################################
 #启用远程访问
 #
 # rabbitmqctl add_user admin #f4^6]e9!go
 # rabbitmqctl set_user_tags admin administrator
 # rabbitmqctl set_permissions -p "/" admin ".*" ".*" ".*"
-#############################################################
-
+#
+# cd /home/p0/disk/initialize/rabbitmq/standard/
+# tar -zcvf rabbitmq-data-standard-initializer-1.0.tar *
+# mv -f /home/p0/disk/initialize/rabbitmq/standard/rabbitmq-data-standard-initializer-1.0.tar /home/p0/sources/scripts/k8s/dockerfiles/rabbitmq/data
+#
+# 以上步骤操作完，默认已启用远程访问，如需手工操作，按以下步骤执行
+####################################################################

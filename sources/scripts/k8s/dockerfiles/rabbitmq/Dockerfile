@@ -33,7 +33,9 @@ RUN mkdir -p /opt/rabbitmq_server/var/lib/rabbitmq/mnesia && mkdir -p /opt/rabbi
 
 WORKDIR /opt
 
+EXPOSE 4369
 EXPOSE 5672
 EXPOSE 15672
+EXPOSE 25672
 
 CMD ["/opt/rabbitmq_server/sbin/rabbitmq-server", "start"]

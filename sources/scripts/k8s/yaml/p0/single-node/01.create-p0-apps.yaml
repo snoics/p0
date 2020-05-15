@@ -12,7 +12,7 @@ metadata:
   name: p0-pv
 spec: 
   capacity: 
-    storage: 5Gi
+    storage: 10Gi
   volumeMode: Filesystem
   accessModes: 
   - ReadWriteOnce
@@ -41,7 +41,7 @@ spec:
   - ReadWriteOnce
   resources: 
     requests: 
-      storage: 5Gi
+      storage: 10Gi
 
 ---
 apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
@@ -69,74 +69,165 @@ spec:
         - containerPort: 3306
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: mysql
+            mountPath: /etc/mysql/mysql.conf.d/mysqld.cnf
+            subPath: mysql/config/mysqld.cnf
+          - name: p0-disk
+            mountPath: /opt/p0/mysql/data/db
+            subPath: mysql/data/db
+          - name: p0-disk
+            mountPath: /opt/p0/mysql/data/tmp
+            subPath: mysql/data/tmp
+          - name: p0-disk
+            mountPath: /opt/p0/mysql/logs
+            subPath: mysql/logs
       - name: mongo-p0
         image: mongo:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 27017
+        args: ["--config","/opt/p0/mongodb/config/mongod.conf"]
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: mongo
+            mountPath: /opt/p0/mongodb/config
+            subPath: mongodb/config
+          - name: p0-disk
+            mountPath: /opt/p0/mongodb/data
+            subPath: mongodb/data
+          - name: p0-disk
+            mountPath: /opt/p0/mongodb/logs
+            subPath: mongodb/logs
       - name: elasticsearch-p0
         image: elasticsearch:p0-1.0 # replace it with your exactly <image_name:tags>
+        env:
+          - name: cluster.name
+            value: elasticsearch
+          - name: discovery.type
+            value: single-node
         ports:
         - containerPort: 9200
         - containerPort: 9300
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: elasticsearch
+            mountPath: /usr/share/elasticsearch/config
+            subPath: elasticsearch/config
+          - name: p0-disk
+            mountPath: /usr/share/elasticsearch/data
+            subPath: elasticsearch/data
+          - name: p0-disk
+            mountPath: /opt/p0/elasticsearch/logs
+            subPath: elasticsearch/logs
       - name: kibana-p0
         image: kibana:p0-1.0 # replace it with your exactly <image_name:tags>
+        env:
+          - name: elasticsearch.hosts
+            value: http://elasticsearch-server-9200:9200
         ports:
         - containerPort: 5610
-        volumeMounts: 
-          - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: kibana
       - name: rabbitmq-p0
         image: rabbitmq:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
+        - containerPort: 4369
         - containerPort: 5672
         - containerPort: 15672
+        - containerPort: 25672
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: rabbitmq
+            mountPath: /etc/rabbitmq/rabbitmq.conf
+            subPath: rabbitmq/config/conf/rabbitmq.conf
+          - name: p0-disk
+            mountPath: /etc/rabbitmq/rabbitmq-env.conf
+            subPath: rabbitmq/config/conf/rabbitmq-env.conf
+          - name: p0-disk
+            mountPath: /opt/rabbitmq_server/var/lib/rabbitmq/mnesia
+            subPath: rabbitmq/data/mnesia
+          - name: p0-disk
+            mountPath: /opt/rabbitmq_server/var/log
+            subPath: rabbitmq/logs
       - name: redis-p0
         image: redis:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 6379
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: redis
-      - name: javaapp-p0
+            mountPath: /opt/p0/redis/config/redis.conf
+            subPath: redis/config/redis.conf
+          - name: p0-disk
+            mountPath: /opt/p0/redis/data
+            subPath: redis/data
+          - name: p0-disk
+            mountPath: /opt/p0/redis/logs
+            subPath: redis/logs
+      - name: javaapp-p0-00
         image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
-        - containerPort: 9090
+        - containerPort: 19090
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: tomcat
+            mountPath: /opt/p0/javaapp
+            subPath: javaapp-00
+      - name: javaapp-p0-01
+        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 19091
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0/javaapp
+            subPath: javaapp-01
+      - name: javaapp-p0-02
+        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 19092
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0/javaapp
+            subPath: javaapp-02
+      - name: javaapp-p0-03
+        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 19093
+        volumeMounts: 
+          - name: p0-disk
+            mountPath: /opt/p0/javaapp
+            subPath: javaapp-03
       - name: tomcat-p0
         image: tomcat:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 8080
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: tomcat
+            mountPath: /opt/p0/tomcat/config/catalina.sh
+            subPath: tomcat/config/conf/catalina.sh
+          - name: p0-disk
+            mountPath: /opt/p0/tomcat/config/conf/logging.properties
+            subPath: tomcat/config/conf/logging.properties
+          - name: p0-disk
+            mountPath: /opt/p0/tomcat/config/conf/server.xml
+            subPath: tomcat/config/conf/server.xml
+          - name: p0-disk
+            mountPath: /opt/tomcat/webapps
+            subPath: tomcat/applications
+          - name: p0-disk
+            mountPath: /opt/p0/tomcat/data
+            subPath: tomcat/data
+          - name: p0-disk
+            mountPath: /opt/p0/tomcat/logs
+            subPath: tomcat/logs
       - name: nginx-p0
         image: nginx:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 80
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0
-            #subPath: nginx
+            mountPath: /opt/p0/nginx/config/conf
+            subPath: nginx/config/conf
+          - name: p0-disk
+            mountPath: /opt/p0/nginx/applications
+            subPath: nginx/applications
+          - name: p0-disk
+            mountPath: /opt/p0/nginx/data
+            subPath: nginx/data
+          - name: p0-disk
+            mountPath: /opt/p0/nginx/logs
+            subPath: nginx/logs
       volumes: 
         - name: p0-disk
           persistentVolumeClaim: 
@@ -155,7 +246,67 @@ spec:
     app: p0-app #TODO: change label selector to match your backend pod
   ports:
   - protocol: TCP
-    name: http
+    name: mysql-server-3306
+    #容器暴露的端口
+    port: 3306 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 3306
+  - protocol: TCP
+    name: mongodb-server-27017
+    #容器暴露的端口
+    port: 27017 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 27017
+  - protocol: TCP
+    name: elasticsearch-server-9200
+    #容器暴露的端口
+    port: 9200 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 9200
+  - protocol: TCP
+    name: elasticsearch-server-9300
+    #容器暴露的端口
+    port: 9300 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 9300
+  - protocol: TCP
+    name: kibana-server-5610
+    #容器暴露的端口
+    port: 5610 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 5610
+  - protocol: TCP
+    name: rabbitmq-server-5672
+    #容器暴露的端口
+    port: 5672 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 5672
+  - protocol: TCP
+    name: rabbitmq-server-15672
+    #容器暴露的端口
+    port: 15672 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 15672
+  - protocol: TCP
+    name: redis-server-6379
+    #容器暴露的端口
+    port: 6379 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 6379
+  - protocol: TCP
+    name: javaapp-server-9090
+    #容器暴露的端口
+    port: 9090 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 9090
+  - protocol: TCP
+    name: tomcat-server-8080
+    #容器暴露的端口
+    port: 8080 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 8080
+  - protocol: TCP
+    name: http-server
     #容器暴露的端口
     port: 90 #TODO: choose an unique port on each node to avoid port conflict
     #真实的服务部署端口
@@ -180,3 +331,11 @@ spec:
               serviceName: p0-svc
               servicePort: 90
             path: /
+          - backend:
+              serviceName: p0-svc
+              servicePort: 15672
+            path: /mq
+          - backend:
+              serviceName: p0-svc
+              servicePort: 5610
+            path: /kibana
