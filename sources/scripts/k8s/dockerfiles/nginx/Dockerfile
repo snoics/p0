@@ -13,7 +13,8 @@ RUN ./configure --prefix=/opt/nginx --user=root --group=root --with-http_ssl_mod
 
 COPY conf /home/workspace/nginx
 RUN mkdir -p /opt/p0/nginx/data \
-    && mkdir -p /opt/p0/nginx/applications \
+    && mkdir -p /opt/p0/nginx/applications/home \
+    && mkdir -p /opt/p0/nginx/applications/m \
     && mkdir -p /opt/p0/nginx/logs \
     && mkdir -p /opt/p0/nginx/config \
     && mv /home/workspace/nginx/conf /opt/p0/nginx/config \
