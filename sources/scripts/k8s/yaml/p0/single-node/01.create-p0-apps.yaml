@@ -118,10 +118,10 @@ spec:
       - name: kibana-p0
         image: kibana:p0-1.0 # replace it with your exactly <image_name:tags>
         env:
-          - name: elasticsearch.hosts
-            value: http://elasticsearch-server-9200:9200
+          - name: ELASTICSEARCH_HOSTS
+            value: http://localhost:9200
         ports:
-        - containerPort: 5610
+        - containerPort: 5601
       - name: rabbitmq-p0
         image: rabbitmq:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
@@ -270,11 +270,11 @@ spec:
     #真实的服务部署端口
     targetPort: 9300
   - protocol: TCP
-    name: kibana-server-5610
+    name: kibana-server-5601
     #容器暴露的端口
-    port: 5610 #TODO: choose an unique port on each node to avoid port conflict
+    port: 5601 #TODO: choose an unique port on each node to avoid port conflict
     #真实的服务部署端口
-    targetPort: 5610
+    targetPort: 5601
   - protocol: TCP
     name: rabbitmq-server-5672
     #容器暴露的端口
@@ -331,11 +331,17 @@ spec:
               serviceName: p0-svc
               servicePort: 90
             path: /
+    - host: mq-p0.yzone01.com
+      http:
+        paths:
           - backend:
               serviceName: p0-svc
               servicePort: 15672
-            path: /mq
+            path: /
+    - host: kibana-p0.yzone01.com
+      http:
+        paths:
           - backend:
               serviceName: p0-svc
-              servicePort: 5610
-            path: /kibana
+              servicePort: 5601
+            path: /
