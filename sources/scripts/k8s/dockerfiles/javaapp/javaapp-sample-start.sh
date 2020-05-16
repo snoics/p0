@@ -6,8 +6,9 @@ echo "javaapp ${APPNAME} server deploy and start ......"
 
 if [ ! -d "${VOLUME_PATH}" ];
 then
-  mkdir -p ${VOLUME_PATH}
-  cp -f ./entrypoint.sh ${VOLUME_PATH}
+  mkdir -p ${VOLUME_PATH}/bin
+  mkdir -p ${VOLUME_PATH}/logs
+  cp -f ./entrypoint.sh ${VOLUME_PATH}/bin
   chown -R systemd-coredump:root ${VOLUME_PATH}
 fi
 

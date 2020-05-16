@@ -16,7 +16,7 @@ spec:
   volumeMode: Filesystem
   accessModes: 
   - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Recycle
+  persistentVolumeReclaimPolicy: Delete
   storageClassName: p0-storage
   local: 
     path: /home/p0/disk/p0
@@ -162,24 +162,33 @@ spec:
         - containerPort: 8080
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0/javaapp
-            subPath: javaapp/mall-admin
+            mountPath: /opt/p0/javaapp/bin
+            subPath: javaapp/mall-admin/bin
+          - name: p0-disk
+            mountPath: /opt/p0/javaapp/logs
+            subPath: javaapp/mall-admin/logs
       - name: javaapp-p0-01
         image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 8081
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0/javaapp
-            subPath: javaapp/mall-search
+            mountPath: /opt/p0/javaapp/bin
+            subPath: javaapp/mall-search/bin
+          - name: p0-disk
+            mountPath: /opt/p0/javaapp/logs
+            subPath: javaapp/mall-search/logs
       - name: javaapp-p0-02
         image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 8085
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0/javaapp
-            subPath: javaapp/mall-portal
+            mountPath: /opt/p0/javaapp/bin
+            subPath: javaapp/mall-portal/bin
+          - name: p0-disk
+            mountPath: /opt/p0/javaapp/logs
+            subPath: javaapp/mall-portal/logs
 #      - name: tomcat-p0
 #        image: tomcat:p0-1.0 # replace it with your exactly <image_name:tags>
 #        ports:

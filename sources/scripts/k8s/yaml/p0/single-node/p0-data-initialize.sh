@@ -141,9 +141,10 @@ APP_DATA_PATH=${DATA_PATH}/javaapp/mall-admin
 if [ ! -d "${APP_DATA_PATH}" ];
 then
   echo "javaapp-00 ${APPNAME} data initialize ......"
-  mkdir -p ${APP_DATA_PATH}
-  cp -f ./entrypoint.sh ${APP_DATA_PATH}
-  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-admin-1.0-SNAPSHOT.jar" >> ${APP_DATA_PATH}/entrypoint.sh
+  mkdir -p ${APP_DATA_PATH}/bin
+  mkdir -p ${APP_DATA_PATH}/logs
+  cp -f ./entrypoint.sh ${APP_DATA_PATH}/bin
+  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-admin-1.0-SNAPSHOT.jar" >> ${APP_DATA_PATH}/bin/entrypoint.sh
   chown -R systemd-coredump:root ${APP_DATA_PATH}
 fi
 
@@ -152,9 +153,10 @@ APP_DATA_PATH=${DATA_PATH}/javaapp/mall-search
 if [ ! -d "${APP_DATA_PATH}" ];
 then
   echo "javaapp-01 ${APPNAME} data initialize ......"
-  mkdir -p ${APP_DATA_PATH}
-  cp -f ./entrypoint.sh ${APP_DATA_PATH}
-  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-search-1.0-SNAPSHOT.jar" >> ${APP_DATA_PATH}/entrypoint.sh
+  mkdir -p ${APP_DATA_PATH}/bin
+  mkdir -p ${APP_DATA_PATH}/logs
+  cp -f ./entrypoint.sh ${APP_DATA_PATH}/bin
+  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-search-1.0-SNAPSHOT.jar" >> ${APP_DATA_PATH}/bin/entrypoint.sh
   chown -R systemd-coredump:root ${APP_DATA_PATH}
 fi
 
@@ -163,9 +165,10 @@ APP_DATA_PATH=${DATA_PATH}/javaapp/mall-portal
 if [ ! -d "${APP_DATA_PATH}" ];
 then
   echo "javaapp-02 ${APPNAME} data initialize ......"
-  mkdir -p ${APP_DATA_PATH}
-  cp -f ./entrypoint.sh ${APP_DATA_PATH}
-  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-portal-1.0-SNAPSHOT.jar" >> ${APP_DATA_PATH}/entrypoint.sh
+  mkdir -p ${APP_DATA_PATH}/bin
+  mkdir -p ${APP_DATA_PATH}/logs
+  cp -f ./entrypoint.sh ${APP_DATA_PATH}/bin
+  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-portal-1.0-SNAPSHOT.jar" >> ${APP_DATA_PATH}/bin/entrypoint.sh
   chown -R systemd-coredump:root ${APP_DATA_PATH}
 fi
 
