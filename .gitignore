@@ -1,4 +1,5 @@
 /disk/
+/.idea/
 *.log
 **/*.log
 **/jdk-8u231-linux-x64.tar.gz
@@ -9,6 +10,6 @@
 **/.classpath
 **/.setting
 **/.settings/
-/.idea/
+**/.idea/
 **/.factorypath
 **/*.iml
