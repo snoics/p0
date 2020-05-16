@@ -1,6 +1,6 @@
 FROM java:p0-1.0
 
-RUN mkdir -p /opt/p0/javaapp/logs && mkdir mkdir -p /opt/p0/javaapp/bin
+RUN mkdir -p /opt/p0/javaapp/logs && mkdir mkdir -p /opt/p0/javaapp/bin && mkdir mkdir -p /opt/p0/javaapp/bin
 COPY entrypoint.sh /opt/p0/javaapp/bin
 
 RUN chmod +x /opt/p0/javaapp/bin/entrypoint.sh && echo 'sleep infinity' >> /opt/p0/javaapp/bin/entrypoint.sh

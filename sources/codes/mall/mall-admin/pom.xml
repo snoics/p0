@@ -96,7 +96,7 @@
                     -->
                     <resources>
                         <resource>
-                            <targetPath>/opt/p0/javaapp</targetPath>
+                            <targetPath>/opt/p0/javaapp/lib</targetPath>
                             <directory>${project.build.directory}</directory>
                             <include>${project.build.finalName}.jar</include>
                         </resource>
