@@ -13,7 +13,7 @@ then
   mkdir -p ${VOLUME_PATH}/data/db
   mkdir -p ${VOLUME_PATH}/data/tmp
   mkdir -p ${VOLUME_PATH}/logs
-  cp -f mysqld.cnf ${VOLUME_PATH}/config/
+  cp -rf mysqld.cnf ${VOLUME_PATH}/config
   chown -R systemd-coredump:root ${VOLUME_PATH}
 fi
 
