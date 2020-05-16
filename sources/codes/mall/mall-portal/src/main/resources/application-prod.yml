@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://db:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/mall?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
     username: reader
     password: 123456
     druid:
@@ -38,5 +38,5 @@ spring:
     publisher-confirms: true #如果对异步消息需要回调必须设置为true
 # 日志配置
 logging:
-  path: /var/logs
+  path: /opt/p0/javaapp/logs
 
