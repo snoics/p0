@@ -76,7 +76,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <imageName>mall/${project.artifactId}:${project.version}</imageName>
+                    <imageName>p0/${project.artifactId}:p0-1.0</imageName>
 <!--                    <dockerHost>${docker.host}</dockerHost>-->
                     <baseImage>javaapp:p0-1.0</baseImage>
 <!--                    <entryPoint>["java", "-jar", "-Dspring.profiles.active=prod","/${project.build.finalName}.jar"]-->

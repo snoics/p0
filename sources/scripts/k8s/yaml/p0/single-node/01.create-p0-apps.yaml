@@ -157,7 +157,7 @@ spec:
             mountPath: /opt/p0/redis/logs
             subPath: redis/logs
       - name: javaapp-p0-mall-admin
-        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        image: p0/mall-admin:p0-1.0 # replace it with your exactly <image_name:tags>
         securityContext:
           privileged: true
         ports:
@@ -170,7 +170,7 @@ spec:
             mountPath: /opt/p0/javaapp/logs
             subPath: javaapp/mall-admin/logs
       - name: javaapp-p0-mall-search
-        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        image: p0/mall-search:p0-1.0 # replace it with your exactly <image_name:tags>
         securityContext:
           privileged: true
         ports:
@@ -183,7 +183,7 @@ spec:
             mountPath: /opt/p0/javaapp/logs
             subPath: javaapp/mall-search/logs
       - name: javaapp-p0-mall-portal
-        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        image: p0/mall-portal:p0-1.0 # replace it with your exactly <image_name:tags>
         securityContext:
           privileged: true
         ports:
