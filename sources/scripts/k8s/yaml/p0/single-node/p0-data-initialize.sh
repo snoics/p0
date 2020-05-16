@@ -137,42 +137,35 @@ then
 fi
 
 cd ${RESOURCE_PATH}/javaapp
-APP_DATA_PATH=${DATA_PATH}/javaapp-00
+APP_DATA_PATH=${DATA_PATH}/javaapp/mall-admin
 if [ ! -d "${APP_DATA_PATH}" ];
 then
   echo "javaapp-00 ${APPNAME} data initialize ......"
   mkdir -p ${APP_DATA_PATH}
   cp -f ./entrypoint.sh ${APP_DATA_PATH}
+  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-admin.jar" >> ${APP_DATA_PATH}/entrypoint.sh
   chown -R systemd-coredump:root ${APP_DATA_PATH}
 fi
 
 cd ${RESOURCE_PATH}/javaapp
-APP_DATA_PATH=${DATA_PATH}/javaapp-01
+APP_DATA_PATH=${DATA_PATH}/javaapp/mall-search
 if [ ! -d "${APP_DATA_PATH}" ];
 then
   echo "javaapp-01 ${APPNAME} data initialize ......"
   mkdir -p ${APP_DATA_PATH}
   cp -f ./entrypoint.sh ${APP_DATA_PATH}
+  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-search.jar" >> ${APP_DATA_PATH}/entrypoint.sh
   chown -R systemd-coredump:root ${APP_DATA_PATH}
 fi
 
 cd ${RESOURCE_PATH}/javaapp
-APP_DATA_PATH=${DATA_PATH}/javaapp-02
+APP_DATA_PATH=${DATA_PATH}/javaapp/mall-portal
 if [ ! -d "${APP_DATA_PATH}" ];
 then
   echo "javaapp-02 ${APPNAME} data initialize ......"
   mkdir -p ${APP_DATA_PATH}
   cp -f ./entrypoint.sh ${APP_DATA_PATH}
-  chown -R systemd-coredump:root ${APP_DATA_PATH}
-fi
-
-cd ${RESOURCE_PATH}/javaapp
-APP_DATA_PATH=${DATA_PATH}/javaapp-03
-if [ ! -d "${APP_DATA_PATH}" ];
-then
-  echo "javaapp-03 ${APPNAME} data initialize ......"
-  mkdir -p ${APP_DATA_PATH}
-  cp -f ./entrypoint.sh ${APP_DATA_PATH}
+  echo "java -jar -Dspring.profiles.active=prod /opt/p0/javaapp/mall-portal.jar" >> ${APP_DATA_PATH}/entrypoint.sh
   chown -R systemd-coredump:root ${APP_DATA_PATH}
 fi
 

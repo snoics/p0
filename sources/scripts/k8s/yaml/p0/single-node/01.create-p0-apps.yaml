@@ -156,61 +156,53 @@ spec:
           - name: p0-disk
             mountPath: /opt/p0/redis/logs
             subPath: redis/logs
-      - name: javaapp-p0-00
+      - name: javaapp-p0-mall-admin
         image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
-        ports:
-        - containerPort: 19090
-        volumeMounts: 
-          - name: p0-disk
-            mountPath: /opt/p0/javaapp
-            subPath: javaapp-00
-      - name: javaapp-p0-01
-        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
-        ports:
-        - containerPort: 19091
-        volumeMounts: 
-          - name: p0-disk
-            mountPath: /opt/p0/javaapp
-            subPath: javaapp-01
-      - name: javaapp-p0-02
-        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
-        ports:
-        - containerPort: 19092
-        volumeMounts: 
-          - name: p0-disk
-            mountPath: /opt/p0/javaapp
-            subPath: javaapp-02
-      - name: javaapp-p0-03
-        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
-        ports:
-        - containerPort: 19093
-        volumeMounts: 
-          - name: p0-disk
-            mountPath: /opt/p0/javaapp
-            subPath: javaapp-03
-      - name: tomcat-p0
-        image: tomcat:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
         - containerPort: 8080
         volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0/tomcat/config/catalina.sh
-            subPath: tomcat/config/conf/catalina.sh
+            mountPath: /opt/p0/javaapp
+            subPath: javaapp/mall-admin
+      - name: javaapp-p0-01
+        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 8081
+        volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0/tomcat/config/conf/logging.properties
-            subPath: tomcat/config/conf/logging.properties
+            mountPath: /opt/p0/javaapp
+            subPath: javaapp/mall-search
+      - name: javaapp-p0-02
+        image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        ports:
+        - containerPort: 8085
+        volumeMounts: 
           - name: p0-disk
-            mountPath: /opt/p0/tomcat/config/conf/server.xml
-            subPath: tomcat/config/conf/server.xml
-          - name: p0-disk
-            mountPath: /opt/tomcat/webapps
-            subPath: tomcat/applications
-          - name: p0-disk
-            mountPath: /opt/p0/tomcat/data
-            subPath: tomcat/data
-          - name: p0-disk
-            mountPath: /opt/p0/tomcat/logs
-            subPath: tomcat/logs
+            mountPath: /opt/p0/javaapp
+            subPath: javaapp/mall-portal
+#      - name: tomcat-p0
+#        image: tomcat:p0-1.0 # replace it with your exactly <image_name:tags>
+#        ports:
+#        - containerPort: 8080
+#        volumeMounts:
+#          - name: p0-disk
+#            mountPath: /opt/p0/tomcat/config/catalina.sh
+#            subPath: tomcat/config/conf/catalina.sh
+#          - name: p0-disk
+#            mountPath: /opt/p0/tomcat/config/conf/logging.properties
+#            subPath: tomcat/config/conf/logging.properties
+#          - name: p0-disk
+#            mountPath: /opt/p0/tomcat/config/conf/server.xml
+#            subPath: tomcat/config/conf/server.xml
+#          - name: p0-disk
+#            mountPath: /opt/tomcat/webapps
+#            subPath: tomcat/applications
+#          - name: p0-disk
+#            mountPath: /opt/p0/tomcat/data
+#            subPath: tomcat/data
+#          - name: p0-disk
+#            mountPath: /opt/p0/tomcat/logs
+#            subPath: tomcat/logs
       - name: nginx-p0
         image: nginx:p0-1.0 # replace it with your exactly <image_name:tags>
         ports:
@@ -294,17 +286,29 @@ spec:
     #真实的服务部署端口
     targetPort: 6379
   - protocol: TCP
-    name: javaapp-server-9090
-    #容器暴露的端口
-    port: 9090 #TODO: choose an unique port on each node to avoid port conflict
-    #真实的服务部署端口
-    targetPort: 9090
-  - protocol: TCP
-    name: tomcat-server-8080
+    name: javaapp-mall-admin-8080
     #容器暴露的端口
     port: 8080 #TODO: choose an unique port on each node to avoid port conflict
     #真实的服务部署端口
     targetPort: 8080
+  - protocol: TCP
+    name: javaapp-mall-search-8081
+    #容器暴露的端口
+    port: 8081 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 8081
+  - protocol: TCP
+    name: javaapp-mall-portal-8085
+    #容器暴露的端口
+    port: 8085 #TODO: choose an unique port on each node to avoid port conflict
+    #真实的服务部署端口
+    targetPort: 8085
+#  - protocol: TCP
+#    name: tomcat-server-8080
+#    #容器暴露的端口
+#    port: 8080 #TODO: choose an unique port on each node to avoid port conflict
+#    #真实的服务部署端口
+#    targetPort: 8080
   - protocol: TCP
     name: http-server
     #容器暴露的端口
@@ -315,7 +319,7 @@ spec:
 #  type: NodePort
 
 ---
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   namespace: p0

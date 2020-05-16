@@ -1,4 +1,3 @@
 #!/bin/bash
-echo 'hello world!'
-
-sleep infinity
+#echo 'hello world!'
+#sleep infinity
