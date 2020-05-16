@@ -158,6 +158,8 @@ spec:
             subPath: redis/logs
       - name: javaapp-p0-mall-admin
         image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        securityContext:
+          privileged: true
         ports:
         - containerPort: 8080
         volumeMounts: 
@@ -167,8 +169,10 @@ spec:
           - name: p0-disk
             mountPath: /opt/p0/javaapp/logs
             subPath: javaapp/mall-admin/logs
-      - name: javaapp-p0-01
+      - name: javaapp-p0-mall-search
         image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        securityContext:
+          privileged: true
         ports:
         - containerPort: 8081
         volumeMounts: 
@@ -178,8 +182,10 @@ spec:
           - name: p0-disk
             mountPath: /opt/p0/javaapp/logs
             subPath: javaapp/mall-search/logs
-      - name: javaapp-p0-02
+      - name: javaapp-p0-mall-portal
         image: javaapp:p0-1.0 # replace it with your exactly <image_name:tags>
+        securityContext:
+          privileged: true
         ports:
         - containerPort: 8085
         volumeMounts: 
@@ -191,7 +197,8 @@ spec:
             subPath: javaapp/mall-portal/logs
 #      - name: tomcat-p0
 #        image: tomcat:p0-1.0 # replace it with your exactly <image_name:tags>
-#        ports:
+#        ports:ll
+
 #        - containerPort: 8080
 #        volumeMounts:
 #          - name: p0-disk
