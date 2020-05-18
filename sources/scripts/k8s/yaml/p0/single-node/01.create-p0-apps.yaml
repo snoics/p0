@@ -351,6 +351,13 @@ spec:
               serviceName: p0-svc
               servicePort: 90
             path: /
+    - host: admin-p0.yzone01.com
+      http:
+        paths:
+          - backend:
+              serviceName: p0-svc
+              servicePort: 8080
+            path: /
     - host: mq-p0.yzone01.com
       http:
         paths:

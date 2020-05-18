@@ -115,11 +115,12 @@ APP_DATA_PATH=${DATA_PATH}/nginx
 if [ ! -d "${APP_DATA_PATH}" ];
 then
   echo "nginx ${APPNAME} data initialize ......"
+  mkdir -p ${APP_DATA_PATH}
   mkdir -p ${APP_DATA_PATH}/config
-  mkdir -p ${APP_DATA_PATH}/applications
   mkdir -p ${APP_DATA_PATH}/data
   mkdir -p ${APP_DATA_PATH}/logs
   cp -rf conf ${APP_DATA_PATH}/config
+  cp -rf applications ${APP_DATA_PATH}
   chown -R systemd-coredump:root ${APP_DATA_PATH}
 fi
 

@@ -7,10 +7,10 @@ echo "nginx ${APPNAME} server deploy and start ......"
 if [ ! -d "${VOLUME_PATH}" ];
 then
   mkdir -p ${VOLUME_PATH}/config
-  mkdir -p ${VOLUME_PATH}/applications
   mkdir -p ${VOLUME_PATH}/data
   mkdir -p ${VOLUME_PATH}/logs
   cp -rf conf ${VOLUME_PATH}/config
+  cp -rf applications ${VOLUME_PATH}
   chown -R systemd-coredump:root ${VOLUME_PATH}
 fi
 
