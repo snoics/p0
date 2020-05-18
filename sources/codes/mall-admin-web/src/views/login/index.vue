@@ -6,9 +6,6 @@
                :rules="loginRules"
                ref="loginForm"
                label-position="left">
-        <div style="text-align: center">
-          <svg-icon icon-class="login-mall" style="width: 56px;height: 56px;color: #409EFF"></svg-icon>
-        </div>
         <h2 class="login-title color-main">商城后台管理</h2>
         <el-form-item prop="username">
           <el-input name="username"
@@ -43,7 +40,6 @@
         </el-form-item>
       </el-form>
     </el-card>
-    <img :src="login_center_bg" class="login-center-layout">
   </div>
 </template>
 
